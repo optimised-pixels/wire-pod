@@ -149,6 +149,10 @@ func StreamingKGSim(req interface{}, esn string, transcribedText string) (string
 			response, err := stream.Recv()
 			if errors.Is(err, io.EOF) {
 				isDone = true
+				if fullRespSlice == nil {
+					logger.Println("fullRespSlice is nil ")
+					return
+				}
 				newStr := fullRespSlice[0]
 				for i, str := range fullRespSlice {
 					if i == 0 {
